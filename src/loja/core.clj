@@ -28,6 +28,8 @@
 (meu-mapa println [true true])
 (meu-mapa println [])
 (meu-mapa println nil)
+; (meu-mapa println (range 100000))
+
 
 
 ; Função do professor -> a solução do professor parece melhor porque define uma variável a menos
@@ -45,10 +47,37 @@
 (meu-mapa println [true true])
 (meu-mapa println [])
 (meu-mapa println nil)
+; (meu-mapa println (range 100000))
 
 
 
 
+
+
+
+; O recur (que deve ser uma das útlimas coisas chamadas, é um laço, e permite que
+; a memória seja melhor alocada, não deixando todos os itens da stack armazenados para
+; depois serem retornados, mas sim, usando cada item e eliminando ele.
+; Aliás, isso se chama TAIL RECURSION, porque a função se chama (com o "recur") na última
+; coisa que ela faz dentro do corpo dela
+(defn meu-mapa
+  [funcao sequencia]
+  (let [primeiro (first sequencia)]
+    (if (not (nil? primeiro))
+      (do
+        (funcao primeiro)
+        (recur funcao (rest sequencia))))))
+
+(meu-mapa println (range 100000))
+
+; Abaixo não é TAIL RECURSION, porque o "recur" não é a última coisa no corpo da função
+;(defn meu-mapa
+;  [funcao sequencia]
+;  (let [primeiro (first sequencia)]
+;    (if (not (nil? primeiro))
+;      (do
+;        (recur funcao (rest sequencia))
+;        (funcao primeiro)))))
 
 
 
