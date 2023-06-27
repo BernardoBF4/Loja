@@ -74,6 +74,21 @@
 
 
 
+; A recursão neste caso ocorre dentro do bloco do "loop",
+; onde também é possível definir símbolos que serão utilizados
+; dentro da função
+(defn conta
+  [elementos]
+  (loop [total-ate-agora 0
+         elementos-restante elementos]
+    (if (seq elementos-restante)
+      (recur (inc total-ate-agora) (next elementos-restante))
+      total-ate-agora)))
 
 
-
+(println (conta nomes))
+(println (conta [false false]))
+(println (conta [nil nil]))
+(println (conta [true true]))
+(println (conta []))
+(println (conta nil))
